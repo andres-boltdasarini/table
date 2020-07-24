@@ -1,11 +1,12 @@
 import {usersAPI} from "../api";
+import {AxiosInstance as axios} from "axios";
 
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const SET_USERS = 'SET_USERS';
 
 
 let initialState = {
-    users: [ ],
+    items: [ ],
     isFetching: true
 }
 
@@ -16,7 +17,7 @@ const tableReducer = (state = initialState, action) => {
             return { ...state, isFetching: action.isFetching}
         }
         case SET_USERS: {
-            return { ...state, users: action.users }
+            return { ...state, items: action.items }
         }
         default:
             return state
@@ -24,17 +25,18 @@ const tableReducer = (state = initialState, action) => {
 }
 
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching })
-export const setUsers = (users) => ({type: SET_USERS, users })
+export const setUsers = (items) => ({type: SET_USERS, items })
 
-export const requestUsers = (page, pageSize) => {
-    return async (dispatch) => {
+export const requestUsers = () => {
+    return  (dispatch) => {
         dispatch(toggleIsFetching(true))
 
-        const data = await usersAPI.getUsers()
-
-        dispatch(toggleIsFetching(false))
-        dispatch(setUsers(data.items))
-
+         axios.get("http://www.filltext.com/?rows=32&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D")
+             .then(response => {
+                 dispatch(toggleIsFetching(false))
+                 const items = response.data
+                 dispatch(setUsers(items))
+             })
     }
 }
 

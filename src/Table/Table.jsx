@@ -11,18 +11,21 @@ class Table extends React.Component {
         this.props.requestUsers()
     }
     render() {
+        let postsElements =
+            this.props.users.map( p => <div>{p.message}</div>)
         return <>
             { this.props.isFetching ? <Preloader /> : null }
+            <div >
+                { postsElements }
+            </div>
             </>
     }
-}
-export const getIsFetching = (state) => {
-    return state.tableReducer.isFetching;
 }
 
 let mapStateToProps = (state) => {
     return {
-        isFetching: getIsFetching(state)
+        users: state.tableReducer.users,
+        isFetching: state.tableReducer.isFetching
     }
 }
 
