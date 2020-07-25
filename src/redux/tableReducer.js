@@ -1,5 +1,4 @@
-import {usersAPI} from "../api";
-import {AxiosInstance as axios} from "axios";
+import * as axios from "axios";
 
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const SET_USERS = 'SET_USERS';

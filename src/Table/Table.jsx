@@ -12,7 +12,7 @@ class Table extends React.Component {
     }
     render() {
         let postsElements =
-            this.props.users.map( p => <div>{p.message}</div>)
+            this.props.items.map( p => <div>{p.firstName}</div>)
         return <>
             { this.props.isFetching ? <Preloader /> : null }
             <div >
@@ -24,7 +24,7 @@ class Table extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.tableReducer.users,
+        items: state.tableReducer.items,
         isFetching: state.tableReducer.isFetching
     }
 }
