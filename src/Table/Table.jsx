@@ -11,9 +11,12 @@ class Table extends React.Component {
         this.props.requestUsers()
     }
     render() {
+debugger
         let postsElements =
-            this.props.items.map( p => <div>{p.firstName}</div>)
-        return <>
+            this.props.items.map( p => p.firstName).sort(function (a, b)
+            {return a - b}).map( p => <div>{p}</div>)
+        console.log(postsElements)
+        return  <>
             { this.props.isFetching ? <Preloader /> : null }
             <div >
                 { postsElements }
