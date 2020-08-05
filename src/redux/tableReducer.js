@@ -11,9 +11,6 @@ let initialState = {
         {id: 101, firstName: 'Sue'},
         {id: 22, firstName: 'Ash'},
     ],
-    pageSize: 5,
-    totalUsersCount: 30,
-    currentPage: 1,
     isFetching: true
 }
 
