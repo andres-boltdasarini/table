@@ -22,7 +22,7 @@ import React from 'react';
             })}
 
      render() {
-
+         const result = Object.values(this.props.items).map(v => Object.values(v)).map(p => p[0])
          let postsElementsId = this.props.items.map(p => p.id).sort(function (a, b) {return a - b}).reverse().map(p => <div>{p}</div>)
          let postsElementsFirstName = this.props.items.map(p => p.firstName).sort().reverse()
          const indexOfLastTodo = this.state.currentPage * this.state.todosPerPage
@@ -44,20 +44,10 @@ import React from 'react';
                  </li>
              );
          })
+         debugger
          return <>
-             {renderPageNumbers}
-             <table border="1">
-                 <tr>
-                     <th>Id</th>
-                     <th>FirstName <button onClick={this.activateSorti} >{this.state.buttext}</button></th>
-                 </tr>
-                 <tr>
-                     <td>{postsElementsId}</td>
-                     <td>{!this.state.sorti && postsElementsFirstName}
-                         {this.state.sorti && currentTodos}
-                     </td>
-                 </tr>
-             </table>
+
+         <div>{result}</div>
          </>
      }
 }
