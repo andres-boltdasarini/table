@@ -8,7 +8,7 @@ const SET_USERS = 'SET_USERS';
 let initialState = {
     items: [
         {id: 133, firstName: 'Bill'},
-        {id: 101, firstName: 'Sue'},
+        {id: 150, firstName: 'Sue'},
         {id: 22, firstName: 'Ash'},
     ],
     isFetching: true

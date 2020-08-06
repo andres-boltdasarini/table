@@ -22,7 +22,12 @@ import React from 'react';
             })}
 
      render() {
-         const result = Object.values(this.props.items).map(v => Object.values(v)).map(p => p[0])
+         const atemA = this.props.items.sort((a, b) => {if(a.firstName < b.firstName ) return -1
+             if(a.firstName  > b.firstName ) return 1}).map(p =><div>{p.id}</div> )
+
+         const atem1 = this.props.items.sort((a, b) => (a.id - b.id)).map(p =><div>{p.id}</div> )
+
+         const result = Object.values(this.props.items).map(v => Object.values(v)).map(p =><div>{p[0]}</div>)
          let postsElementsId = this.props.items.map(p => p.id).sort(function (a, b) {return a - b}).reverse().map(p => <div>{p}</div>)
          let postsElementsFirstName = this.props.items.map(p => p.firstName).sort().reverse()
          const indexOfLastTodo = this.state.currentPage * this.state.todosPerPage
@@ -44,10 +49,12 @@ import React from 'react';
                  </li>
              );
          })
-         debugger
+
+
+
          return <>
 
-         <div>{result}</div>
+         <div>{atem1}</div>
          </>
      }
 }
