@@ -24,6 +24,19 @@ import React from 'react';
 
      render() {
 
+         let postsElements =
+             this.props.posts.map( p => <div>{p.message}</div>)
+         let newPostElement = React.createRef();
+
+         let onAddPost = () => {
+             let text = newPostElement.current.value;
+             this.props.addPost(text);
+         }
+         let onPostChange = () => {
+             let text = newPostElement.current.value;
+             this.props.updateNewPostText(text);
+         }
+
          const result = Object.values(this.props.items).map(v => Object.values(v)).map(p =><div>{p[0]}</div>)
 
 
@@ -71,6 +84,16 @@ import React from 'react';
                      <td>{postsElementsFirstName}</td>
                  </tr>
              </table>
+             <div>
+                 <div>
+                     <input onChange={ onPostChange } ref={newPostElement}
+                            value={this.props.newPostText}/>
+                 </div>
+                 <div>
+                     <button onClick={ onAddPost }>Add post</button>
+                 </div>
+                 <div>{postsElements}</div>
+             </div>
          </>
      }
 }

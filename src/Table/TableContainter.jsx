@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Preloader from "../common/Preloader";
-import {requestUsers} from "../redux/tableReducer";
+import {addPost, requestUsers, updateNewPostText} from "../redux/tableReducer";
 import Table from "./Table";
 
 
@@ -28,9 +28,11 @@ let mapStateToProps = (state) => {
         isFetching: state.tableReducer.isFetching,
         totalUsersCount: state.tableReducer.totalUsersCount,
         pageSize: state.tableReducer.pageSize,
-        currentPage: state.tableReducer.currentPage
+        currentPage: state.tableReducer.currentPage,
+        posts: state.tableReducer.posts,
+        newPostText: state.tableReducer.newPostText
     }
 }
 
 
-export default connect(mapStateToProps,{requestUsers })(TableContainer)
+export default connect(mapStateToProps,{requestUsers,updateNewPostText,addPost})(TableContainer)
