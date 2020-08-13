@@ -34,12 +34,12 @@ const tableReducer = (state = initialState, action) => {
         }
         case ADD_POST: {
             let newPost = {
-                id: 5,
-                message: state.newPostText,
+                id: 55,
+                firstName: state.newPostText,
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
+                items: [...state.items, newPost],
                 newPostText: action.newText
             };
         }

@@ -24,8 +24,7 @@ import React from 'react';
 
      render() {
 
-         let postsElements =
-             this.props.posts.map( p => <div>{p.message}</div>)
+
          let newPostElement = React.createRef();
 
          let onAddPost = () => {
@@ -92,7 +91,7 @@ import React from 'react';
                  <div>
                      <button onClick={ onAddPost }>Add post</button>
                  </div>
-                 <div>{postsElements}</div>
+
              </div>
          </>
      }
