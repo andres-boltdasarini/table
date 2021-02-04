@@ -1,12 +1,15 @@
-import React from 'react';
-import './App.css';
-import Table from "./Table/TableContainter";
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div>
-<Table/>
-    </div>
-  );
+
+class App extends Component {
+
+    render() {
+        return (
+            <div className="container">
+                MyApp
+            </div>
+        );
+    }
 }
+
 export default App;
