@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import  axios from "axios";
 import Loader from "./Loader/Loader";
 import Table from "./Table/Table";
+import _ from 'lodash';
 
 
 class App extends Component {
     state ={
         isLoading: true,
         data: [],
+        sort: 'asc',
+        sortField: 'id'
     }
     async componentDidMount() {
 
@@ -18,6 +21,16 @@ class App extends Component {
             data
         })
     }
+    onSort = (sortField) => {
+        const cloneData = this.state.data.concat()
+        const sortType = this.state.sort === 'asc' ? 'desc' : 'asc';
+        const orderedData = _.orderBy(cloneData, sortField, sortType);
+        this.setState({
+            data:orderedData,
+            sort:sortType,
+            sortField
+        })
+    }
     render() {
         return (
             <div className="container">
@@ -26,6 +39,7 @@ class App extends Component {
                         ? <Loader />
                         : <Table
                             data={this.state.data}
+                            onSort={this.onSort}
                         />
                 }
             </div>
