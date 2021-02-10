@@ -3,6 +3,7 @@ import  axios from "axios";
 import Loader from "./Loader/Loader";
 import Table from "./Table/Table";
 import _ from 'lodash';
+import {DetailRowView} from "./DetailRowView/DetailRowView";
 
 
 class App extends Component {
@@ -28,9 +29,13 @@ class App extends Component {
         this.setState({
             data:orderedData,
             sort:sortType,
-            sortField
+            sortField,
+            row: null
         })
     }
+    onRowSelect = row => (
+        this.setState({row})
+    )
     render() {
         return (
             <div className="container">
@@ -42,7 +47,11 @@ class App extends Component {
                             onSort={this.onSort}
                             sort={this.state.sort}
                             sortField={this.state.sortField}
+                            onRowSelect={this.onRowSelect}
                         />
+                }
+                {
+                    this.state.row ? <DetailRowView person={this.state.row}  /> : null
                 }
             </div>
         );
