@@ -30,12 +30,12 @@ class App extends Component {
     onSort = sortField => {
 
         const cloneData = this.state.data.concat();
-        const sortType = this.state.sort === 'asc' ? 'desc' : 'asc';
-        const orderedData = _.orderBy(cloneData, sortField, sortType);
+        const sort = this.state.sort === 'asc' ? 'desc' : 'asc';
+        const data = _.orderBy(cloneData, sortField, sort);
 
         this.setState({
-            data: orderedData,
-            sort: sortType,
+            data,
+            sort,
             sortField
         })
     }
