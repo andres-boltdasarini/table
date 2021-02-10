@@ -1,42 +1,66 @@
 import React, { Component } from 'react';
-import  axios from "axios";
-import Loader from "./Loader/Loader";
-import Table from "./Table/Table";
+import Loader from './Loader/Loader';
+import Table from './Table/Table';
 import _ from 'lodash';
 import {DetailRowView} from "./DetailRowView/DetailRowView";
+import {ModeSelector} from "./ModeSelector/ModeSelector";
+import axios from "axios";
 
 
 class App extends Component {
     state ={
-        isLoading: true,
+        isModeSelected: false,
+        isLoading: false,
         data: [],
-        sort: 'asc',
-        sortField: 'id'
+        sort: 'asc',  // 'desc'
+        sortField: 'id',
+        row: null,
     }
-    async componentDidMount() {
 
-        const response = await axios.get(` http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}`)
+    async fetchData(url) {
+        const response = await axios.get(url)
         const data = await response.data
+
         this.setState({
             isLoading: false,
             data: _.orderBy(data, this.state.sortField, this.state.sort)
         })
+
     }
-    onSort = (sortField) => {
-        const cloneData = this.state.data.concat()
+    onSort = sortField => {
+
+        const cloneData = this.state.data.concat();
         const sortType = this.state.sort === 'asc' ? 'desc' : 'asc';
         const orderedData = _.orderBy(cloneData, sortField, sortType);
+
         this.setState({
-            data:orderedData,
-            sort:sortType,
-            sortField,
-            row: null
+            data: orderedData,
+            sort: sortType,
+            sortField
         })
     }
+    modeSelectHandler = url => {
+        // console.log(url)
+        this.setState({
+            isModeSelected: true,
+            isLoading: true,
+        })
+        this.fetchData(url)
+    }
+
+
+
     onRowSelect = row => (
         this.setState({row})
     )
     render() {
+        if(!this.state.isModeSelected){
+            return (
+                <div className="container">
+                    <ModeSelector onSelect={this.modeSelectHandler}/>
+                </div>
+            )
+        }
         return (
             <div className="container">
                 {
@@ -51,7 +75,7 @@ class App extends Component {
                         />
                 }
                 {
-                    this.state.row ? <DetailRowView person={this.state.row}  /> : null
+                    this.state.row ? <DetailRowView person={this.state.row} /> : null
                 }
             </div>
         );
