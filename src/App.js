@@ -6,6 +6,7 @@ import {DetailRowView} from "./DetailRowView/DetailRowView";
 import {ModeSelector} from "./ModeSelector/ModeSelector";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
+import {TableSearch} from './TableSearch/TableSearch';
 
 
 class App extends Component {
@@ -69,13 +70,17 @@ class App extends Component {
                 {
                     this.state.isLoading
                         ? <Loader />
-                        : <Table
-                            data={displayData}
-                            onSort={this.onSort}
-                            sort={this.state.sort}
-                            sortField={this.state.sortField}
-                            onRowSelect={this.onRowSelect}
-                        />
+                        : <React.Fragment>
+                            <TableSearch />
+                            <Table
+                                data={displayData}
+                                onSort={this.onSort}
+                                sort={this.state.sort}
+                                sortField={this.state.sortField}
+                                onRowSelect={this.onRowSelect}
+                            />
+                        </React.Fragment>
+
                 }
                 {
 
