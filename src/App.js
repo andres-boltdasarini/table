@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Loader from './Loader/Loader';
-import Table from './Table/Table';
 import _ from 'lodash';
 import {DetailRowView} from "./DetailRowView/DetailRowView";
 import {ModeSelector} from "./ModeSelector/ModeSelector";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
 import {TableSearch} from './TableSearch/TableSearch';
+import {Table} from "./Table/Table";
 
 
 class App extends Component {
@@ -55,7 +55,9 @@ class App extends Component {
     pageChangeHandler = ({selected}) => (
         this.setState({currentPage: selected})
     )
-
+    searchHandler = search =>(
+        console.log(search)
+    )
     render() {
         if(!this.state.isModeSelected){
             return (
@@ -71,7 +73,7 @@ class App extends Component {
                     this.state.isLoading
                         ? <Loader />
                         : <React.Fragment>
-                            <TableSearch />
+                            <TableSearch onSearch={this.searchHandler} />
                             <Table
                                 data={displayData}
                                 onSort={this.onSort}

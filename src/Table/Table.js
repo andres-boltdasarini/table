@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default (props) => (
+export const Table = (props) => (
     <table className="table">
         <thead>
         <tr>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 export const TableSearch = props => {
-    const [value, setValue] = useState('')
+    const [val, setValue] = useState('')
     const valueChangeHandler = event => {
         setValue(event.target.value)
     }
@@ -11,13 +11,13 @@ export const TableSearch = props => {
             <div className="input-group-prepend">
                 <button
                     className="btn btn-outline-secondary"
-                    onClick={() => props.onSearch(value)} >Search</button>
+                    onClick={props.onSearch.bind(val)} >Search</button>
             </div>
             <input
                 type="text"
                 className="form-control"
                 onChange={valueChangeHandler}
-                value={value}
+
             />
         </div>
     )
