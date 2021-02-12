@@ -14,11 +14,11 @@ class App extends Component {
         isModeSelected: false,
         isLoading: false,
         data: [],
-        sort: 'asc',  // 'desc'
+        sort: 'asc',
         sortField: 'id',
         row: null,
-        pageSize: 50,
         currentPage: 0,
+        search:''
     }
 
     async fetchData(url) {
@@ -39,7 +39,7 @@ class App extends Component {
     }
 
     modeSelectHandler = url => {
-        // console.log(url)
+
         this.setState({
             isModeSelected: true,
             isLoading: true,
@@ -56,9 +56,29 @@ class App extends Component {
         this.setState({currentPage: selected})
     )
     searchHandler = search => {
-        console.log(search)
+        this.setState({search, currentPage: 0})
     }
+    getFilteredData(){
+
+
+        if (!this.state.search) {
+            return this.state.data
+        }
+        var result = this.state.data.filter(item => {
+            return (
+                item["firstName"].toLowerCase().includes(this.state.search.toLowerCase()) ||
+                item["lastName"].toLowerCase().includes(this.state.search.toLowerCase()) ||
+                item["email"].toLowerCase().includes(this.state.search.toLowerCase())
+            );
+        });
+        if(!result.length){
+            result = this.state.data
+        }
+        return result
+    }
+
     render() {
+        const pageSize = 50;
         if(!this.state.isModeSelected){
             return (
                 <div className="container">
@@ -66,7 +86,10 @@ class App extends Component {
                 </div>
             )
         }
-        const displayData = _.chunk(this.state.data, this.state.pageSize)[this.state.currentPage]
+
+        const filteredData = this.getFilteredData();
+        const pageCount = Math.ceil(filteredData.length / pageSize)
+        const displayData = _.chunk(filteredData, pageSize)[this.state.currentPage]
         return (
             <div className="container">
                 {
@@ -92,7 +115,7 @@ class App extends Component {
                             nextLabel={'>'}
                             breakLabel={'...'}
                             breakClassName={'break-me'}
-                            pageCount={20}
+                            pageCount={pageCount}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
                             onPageChange={this.pageChangeHandler}
