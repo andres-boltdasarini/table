@@ -55,9 +55,9 @@ class App extends Component {
     pageChangeHandler = ({selected}) => (
         this.setState({currentPage: selected})
     )
-    searchHandler = search =>(
+    searchHandler = search => {
         console.log(search)
-    )
+    }
     render() {
         if(!this.state.isModeSelected){
             return (
