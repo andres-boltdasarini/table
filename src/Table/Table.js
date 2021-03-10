@@ -2,7 +2,7 @@ import React from 'react';
 
 
 export const Table = (props) => (
-    <table className="table">
+    <table className="table table-hover">
         <thead>
         <tr>
             <th onClick={props.onSort.bind(null, 'id')}>

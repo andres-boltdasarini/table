@@ -93,6 +93,9 @@ class App extends Component {
         return (
             <div className="container">
                 {
+                    this.state.row ? <DetailRowView person={this.state.row} /> : null
+                }
+                {
                     this.state.isLoading
                         ? <Loader />
                         : <React.Fragment>
@@ -129,9 +132,6 @@ class App extends Component {
                             nextLinkClassName="page-link"
                             forcePage={this.state.currentPage}
                         /> : null
-                }
-                {
-                    this.state.row ? <DetailRowView person={this.state.row} /> : null
                 }
             </div>
         );
